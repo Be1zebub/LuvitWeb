@@ -1,5 +1,7 @@
 # LuvitWeb
 
+Module that handle mixed luahtml files with https://github.com/Be1zebub/LuaHTML & route it with luvit http/https modules.
+
 Usage example:
 ```
 local luahtml_server = require("luahtml_server")
