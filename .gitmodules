@@ -1,0 +1,3 @@
+[submodule "LuaHTML"]
+	path = LuaHTML
+	url = git@github.com:Be1zebub/LuaHTML.git
