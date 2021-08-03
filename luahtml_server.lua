@@ -66,10 +66,15 @@ return function(path, domain, http_port, https_port)
 
 	http.createServer(onRequest):listen(http_port)
 
-	https.createServer({
-	  key = fs.readFileSync("/etc/letsencrypt/live/".. domain .."/privkey.pem"),
-	  cert = fs.readFileSync("/etc/letsencrypt/live/".. domain .."/cert.pem"),
-	}, onRequest):listen(https_port)
+	if not (domain and https_port) then return end
+	fs.exists("/etc/letsencrypt/live/".. domain, function(ok)
+		if not ok then return end
+	
+		https.createServer({
+			key = fs.readFileSync("/etc/letsencrypt/live/".. domain .."/privkey.pem"),
+			cert = fs.readFileSync("/etc/letsencrypt/live/".. domain .."/cert.pem"),
+		}, onRequest):listen(https_port)
+	end)
 end
 
 --[[ Example:
